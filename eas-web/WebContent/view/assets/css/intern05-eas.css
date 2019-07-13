@@ -1,0 +1,7 @@
+th:hover{
+    cursor: pointer;
+}
+.glyphicon{
+    float: right;
+    margin-right: -5px;
+}
