@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://cxf.apache.org/jaxrs
+http://cxf.apache.org/schemas/jaxrs.xsd
+http://cxf.apache.org/jaxws 
+http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<!-- Beans definition for module WorkforceManagement -->
+<!-- 	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" /> -->
+<!-- PRODUCT -->
+	<jaxrs:server id="intern05ProductServiceRest" address="/intern05Product">
+		<jaxrs:providers>
+			<ref bean="jsonProvider" />
+		</jaxrs:providers>
+		<jaxrs:serviceBeans>
+			<bean id="ntern05ProductServiceClass" class="com.itsol.eas.rest.Intern05ProductRsServiceImpl" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+	
+	
+	<!-- INVOICE -->
+	<jaxrs:server id="intern05InvoiceServiceRest" address="/intern05Invoice">
+		<jaxrs:providers>
+			<ref bean="jsonProvider" />
+		</jaxrs:providers>
+		<jaxrs:serviceBeans>
+			<bean id="intern05InvoiceServiceClass" class="com.itsol.eas.rest.Intern05InvoiceRsServiceImpl" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+
+	<!-- INVOICE DETAIL -->
+	<jaxrs:server id="intern05InvoiceDetailServiceRest" address="/intern05InvoiceDetail">
+		<jaxrs:providers>
+			<ref bean="jsonProvider" />
+		</jaxrs:providers>
+		<jaxrs:serviceBeans>
+			<bean id="intern05InvoiceDetailServiceClass" class="com.itsol.eas.rest.Intern05InvoiceDetailRsServiceImpl" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+
+</beans>

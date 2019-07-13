@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:jaxrs="http://cxf.apache.org/jaxrs"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+http://cxf.apache.org/jaxrs
+http://cxf.apache.org/schemas/jaxrs.xsd
+http://cxf.apache.org/jaxws 
+http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<!-- Beans definition for module WorkforceManagement -->
+
+
+	<jaxrs:server id="intern05EmployeeServiceRest" address="/intern05EmployeeServiceRest">
+		<jaxrs:providers>
+			<ref bean="jsonProvider" />
+		</jaxrs:providers>
+		<jaxrs:serviceBeans>
+			<bean id="intern05EmployeeServiceClass" class="com.itsol.eas.rest.Intern05EmployeeRsServiceImpl" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+
+	<jaxrs:server id="intern05DepartmentServiceRest" address="/intern05DepartmentServiceRest">
+		<jaxrs:providers>
+			<ref bean="jsonProvider" />
+		</jaxrs:providers>
+		<jaxrs:serviceBeans>
+			<bean id="intern05DepartmentServiceClass" class="com.itsol.eas.rest.Intern05DepartmentRsServiceImpl" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+
+	<jaxrs:server id="intern05LiteracyServiceRest" address="/intern05LiteracyServiceRest">
+		<jaxrs:providers>
+			<ref bean="jsonProvider" />
+		</jaxrs:providers>
+		<jaxrs:serviceBeans>
+			<bean id="intern05LiteracyServiceClass" class="com.itsol.eas.rest.Intern05LiteracyRsServiceImpl" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+
+	<jaxrs:server id="intern05PositionServiceRest" address="/intern05PositionServiceRest">
+		<jaxrs:providers>
+			<ref bean="jsonProvider" />
+		</jaxrs:providers>
+		<jaxrs:serviceBeans>
+			<bean id="intern05PositionServiceClass" class="com.itsol.eas.rest.Intern05PositionRsServiceImpl" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+
+	<jaxrs:server id="intern05SalaryServiceRest" address="/intern05SalaryServiceRest">
+		<jaxrs:providers>
+			<ref bean="jsonProvider" />
+		</jaxrs:providers>
+		<jaxrs:serviceBeans>
+			<bean id="intern05SalaryServiceClass" class="com.itsol.eas.rest.Intern05SalaryRsServiceImpl" />
+		</jaxrs:serviceBeans>
+	</jaxrs:server>
+
+</beans>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="eas-web">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="eas-service.war" deploy-path="/WEB-INF/lib" handle="module:/resource/eas-service/eas-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="erp-service-base.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/erp-service-base/erp-service-base">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="eas-web"/>
+        <property name="java-output-path" value="/eas-web/build/classes"/>
+    </wb-module>
+</project-modules>

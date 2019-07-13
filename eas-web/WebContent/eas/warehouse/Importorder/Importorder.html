@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Nhập hàng</title>
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="/eas-web/view/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/eas-web/view/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <!-- text fonts -->
+    <link rel="stylesheet" href="/eas-web/view/assets/css/fonts.googleapis.com.css" />
+
+    <!-- ace styles -->
+    <link rel="stylesheet" href="/eas-web/view/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+    <link rel="stylesheet" href="/eas-web/view/assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="/eas-web/view/assets/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="/eas-web/view/assets/css/chosen.min.css" />
+
+    <!-- ace settings handler -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.4.0/restangular.js"></script>
+    <script src="/eas-web/view/assets/js/jquery-2.1.4.min.js"></script>
+    <script src="/eas-web/view/assets/js/bootstrap.min.js"></script>
+    <!-- ace scripts -->
+    <script src="/eas-web/view/assets/js/ace-elements.min.js"></script>
+    <script src="/eas-web/view/assets/js/ace.min.js"></script>
+    <script src="/eas-web/view/assets/js/chosen.jquery.min.js"></script>
+    <script src="/eas-web/view/pagination/dirPagination.js"></script>
+    <script src="Importorder.js"></script>
+</head>
+
+<body class="no-skin" ng-app="MyApp" ng-controller="myCtrl">
+    <div id="navbar" class="navbar navbar-default ace-save-state">
+        <div class="navbar-container ace-save-state" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="index.html" class="navbar-brand">
+                    <small>
+                        <i class="fa fa-laptop"></i> Siêu thị điện máy
+                    </small>
+                </a>
+            </div>
+
+        </div>
+        <!-- /.navbar-container -->
+    </div>
+    <!-- Main -->
+    <div class="main-container ace-save-state" id="main-container">
+        <div id="sidebar" class="sidebar  responsive  ace-save-state">
+            <ul class="nav nav-list">
+                <!-- <li class="">
+					<a href="index.html">
+						<i class="menu-icon fa fa-tachometer"></i>
+						<span class="menu-text">
+							Trang chủ </span>
+					</a>
+					<b class="arrow"></b>
+				</li> -->
+
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-users"></i>
+                        <span class="menu-text">Quản lý nhân sự</span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="/eas-web/eas/employee/employee.html" target="_blank">
+                                <i class="menu-icon fa fa-caret-right"></i>Hồ sơ nhân viên
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <!-- <li class="">
+							<a href="#" class="dropdown-toggle">
+								<i class="menu-icon fa fa-caret-right"></i> Layouts
+							</a>
+							<b class="arrow"></b>
+						</li> -->
+                    </ul>
+                </li>
+
+                <li class="active open">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-archive"></i>
+                        <span class="menu-text">
+                            Quản lý kho </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li class="active">
+                            <a href="">
+                                <i class="menu-icon fa fa-caret-right"></i> Nhập hàng
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="/eas-web/eas/warehouse/Exportorder/Exportorder.html" target="_blank">
+                                <i class="menu-icon fa fa-caret-right"></i> Xuất hàng
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="/eas-web/eas/warehouse/Statistics/Statistics.html" target="_blank">
+                                <i class="menu-icon fa fa-caret-right"></i> Thống kê
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-list-alt"></i>
+                        <span class="menu-text">
+                            Quản lý đơn hàng </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="/eas-web/eas/invoice/invoice.html" target="_blank">
+                                <i class="menu-icon fa fa-caret-right"></i> Quản lý hóa đơn
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="/eas-web/eas/invoice/create-invoice.html" target="_blank">
+                                <i class="menu-icon fa fa-caret-right"></i> Tạo mới hóa đơn
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.nav-list -->
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left"
+                    data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h3 class="header smaller lighter blue" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Phiếu nhập hàng</h3>
+                                <div class="clearfix">
+                                    <div class="pull-left tableTools-container">
+                                        <div class="dt-buttons btn-overlap btn-group">
+                                            <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table"
+                                                data-original-title="" title="Thêm mới" ng-click="Add()" name="click">
+                                                <span>
+                                                    <i class="fa fa-plus bigger-110 blue"></i>
+                                                    <span class="hidden">Thêm mới</span>
+                                                </span>
+                                            </a>
+                                            <a class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table"
+                                                data-original-title="" title="Sửa" ng-click="editObj()">
+                                                <span>
+                                                    <i class="fa fa-pencil bigger-110 pink"></i>
+                                                    <span class="hidden">Sửa</span>
+                                                </span>
+                                            </a>
+                                            <a class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table"
+                                                data-original-title="" title="Xóa" ng-click="deleteObj()">
+                                                <span>
+                                                    <i class="fa fa-trash-o bigger-110 orange"></i>
+                                                    <span class="hidden">Xóa</span>
+                                                </span>
+                                            </a>
+                                            <a class="dt-button buttons-excel buttons-flash btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table"
+                                                title="Lưu" ng-click="saveUpdate()" type="submit">
+                                                <span>
+                                                    <i class="fa fa-floppy-o bigger-110 green"></i>
+                                                    <span class="hidden">Lưu</span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <div class="dt-buttons btn-overlap btn-group">
+                                            <a class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table"
+                                                data-original-title="" title="Tìm kiếm" ng-click="search1()">
+                                                <span>
+                                                    <i class="fa fa-search bigger-110 pink"></i>
+                                                    <span class="hidden">Tìm kiếm</span>
+                                                </span>
+                                            </a>
+                                            <a class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table"
+                                                data-original-title="" title="Xem bảng/chi tiết" ng-click="viewObj()">
+                                                <span>
+                                                    <i class="fa fa-list-alt bigger-110 blue"></i>
+                                                    <span class="hidden">Xem bảng/chi tiết</span>
+                                                </span>
+                                            </a>
+                                            <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table"
+                                                data-original-title="" title="Xuất file Excel">
+                                                <span>
+                                                    <i class="fa fa-file-excel-o bigger-110 green"></i>
+                                                    <span class="hidden">Xuất file Excel</span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <!-- thêm mới phiếu nhập -->
+                                <div ng-show="nhapHang">
+                                    <form class="form-horizontal widget-box " role="form">
+                                        <div class="widget-header">
+                                            <h4 class="widget-title">
+                                                <i class="fa fa-plus bigger-110 blue"></i> Thêm mới
+                                            </h4>
+                                        </div>
+                                        <br />
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên hàng:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <select type="text" ng-model="prId" ng-options="dm.prId as dm.prName for dm in productList" ng-change="changePrcategory()">
+                                                                <option selected disabled value>-- Chọn tên hàng --</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Loại hàng:* </label>
+                                                        <div class="col-sm-9">
+                                                            <select type="text" placeholder="Loại hàng" ng-model="prCategoryId" ng-options="dm.prCategoryId as dm.prCategory for dm in prCategoryList"
+                                                                ng-change="changeProduct()">
+                                                                <option selected disabled value>-- Chọn loại hàng --</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nhà cung cấp </label>
+                                                        <div class="col-sm-9">
+                                                            <select type="text" name="suName" ng-model="suId" ng-options="dm.suId as dm.suName for dm in supplierList" required>
+                                                                <option selected disabled value>-- Chọn nhà cung cấp --</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Đơn giá:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" placeholder="" ng-model="unitPrice" class="col-xs-10 col-sm-9" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Số lượng nhập:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" placeholder="" ng-model="quantity" class="col-xs-10 col-sm-9" />
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" readonly for="form-field-1"> Đơn vị tính tiền </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" ng-model="donvitinh" class="col-xs-10 col-sm-9" value="{{donvitinh}}" readonly/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ngày lập phiếu:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="date" id="form-field-1" ng-model="createDate" class="col-xs-10 col-sm-9" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Người lập:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <select ng-model="emId" ng-options="em.emId as em.firstName +  ' ' +em.lastName for em in employeeList">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ghi chú </label>
+
+                                                        <div class="col-sm-9">
+                                                            <textarea type="text" id="form-field-1" placeholder="" ng-model="note" class="col-xs-10 col-sm-9"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                                <!-- Sửa thông tin -->
+                                <div ng-show="edit">
+                                    <form class="form-horizontal widget-box " role="form">
+                                        <div class="widget-header">
+                                            <h4 class="widget-title">
+                                                <i class="fa fa-list-alt bigger-110 blue"></i> Sửa thông tin
+                                            </h4>
+                                        </div>
+                                        <br />
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Mã phiếu </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{editObj.imId}}" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên hàng:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <select type="text" ng-model="editObj.prId" ng-options="dm.prId as dm.prName for dm in productList" ng-change="changePrcategory()">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Loại hàng:* </label>
+                                                        <div class="col-sm-9">
+                                                            <select type="text" placeholder="Loại hàng" ng-model="editObj.prCategoryId" ng-options="dm.prCategoryId as dm.prCategory for dm in prCategoryList"
+                                                                ng-change="changeProduct()">
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nhà cung cấp </label>
+                                                        <div class="col-sm-9">
+                                                            <select type="text" name="suName" ng-model="editObj.suId" ng-options="dm.suId as dm.suName for dm in supplierList" required>
+                                                                <option selected disabled value>-- Chọn nhà cung cấp --</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Đơn giá:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" placeholder="" ng-model="editObj.unitPrice" class="col-xs-10 col-sm-9" value="{{editObj.unitPrice}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Số lượng nhập:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" placeholder="" ng-model="editObj.quantity" class="col-xs-10 col-sm-9" value="{{editObj.quantity}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" readonly for="form-field-1"> Đơn vị tính tiền </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" ng-model="editObj.unit" class="col-xs-10 col-sm-9" value="{{editObj.unit}}"
+                                                                readonly/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ngày lập phiếu:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="date" id="form-field-1" placeholder="" ng-model="editObj.createDate" class="col-xs-10 col-sm-9" value="{{editObj.createDate}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Người lập:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <select ng-model="editObj.emId" ng-options="em.emId as em.firstName +  ' ' +em.lastName for em in employeeList">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ghi chú </label>
+
+                                                        <div class="col-sm-9">
+                                                            <textarea type="text" id="form-field-1" placeholder="" ng-model="editObj.note" class="col-xs-10 col-sm-9" value="{{editObj.note}}"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                                <!-- Xem chi tiết -->
+                                <div ng-show="view">
+                                    <form class="form-horizontal widget-box " role="form">
+                                        <div class="widget-header">
+                                            <h4 class="widget-title">
+                                                <i class="fa fa-list-alt bigger-110 blue"></i> Xem thông tin
+                                            </h4>
+                                        </div>
+                                        <br />
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Mã phiếu </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{viewObjex.imId}}" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên hàng </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{viewObjex.prName}}" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Loại hàng </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{viewObjex.prCategory}}"
+                                                            />
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nhà cung cấp </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" readonly class="col-xs-10 col-sm-9" value="{{viewObjex.suName}}" />
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Đơn giá </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{viewObjex.unitPrice}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Số lượng nhập </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{viewObjex.quantity}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Đơn vị tính tiền </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{viewObjex.unit}}" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ngày lập phiếu </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="date" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{viewObjex.createDate}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Người lập </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{viewObjex.firstName}} {{viewObjex.lastName}}"
+                                                            />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ghi chú </label>
+
+                                                        <div class="col-sm-9">
+                                                            <textarea type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{viewObjex.note}}"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                                <!-- tìm kiếm -->
+                                <div ng-show="searchform">
+                                    <form class="form-horizontal widget-box " role="form">
+                                        <div class="widget-header">
+                                            <h4 class="widget-title">
+                                                <i class="fa fa-search-o bigger-110 blue"></i> Tìm kiếm
+                                            </h4>
+                                        </div>
+                                        <br />
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td class="col-sm-3 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Mã phiếu </label>
+
+                                                        <div class="col-sm-4">
+                                                            <input type="text" id="form-field-1" placeholder="" class="col-xs-10 col-sm-9" ng-model="searchObj.imId" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên hàng </label>
+
+                                                        <div class="col-sm-9">
+                                                            <select type="text" ng-model="searchObj.prId" ng-options="dm.prId as dm.prName for dm in importorderList">
+                                                                <option selected value disabled>-------</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Loại hàng </label>
+                                                        <div class="col-sm-9">
+                                                            <select type="text" placeholder="Loại hàng" ng-model="searchObj.prCategoryId" ng-options="dm.prCategoryId as dm.prCategory for dm in prCategoryList">
+                                                                <option selected value disabled>-------</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                </td>
+                                                <td class="col-sm-7 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Nhà cung cấp </label>
+                                                        <div class="col-sm-9">
+                                                            <select type="text" ng-model="searchObj.suId" ng-options="dm.suId as dm.suName for dm in supplierList">
+                                                                <option selected value disabled>-------</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Ngày lập phiếu: </label>&nbsp
+                                                        <div class="col-sm-9">
+                                                            <input type="date" id="form-field-1" class="col-xs-10 col-sm-4" ng-model="searchObj.createDateFrom" />
+                                                            <label class="col-sm-2 control-label center" for="form-field-1"> Đến ngày </label> &nbsp
+                                                            <input type="date" id="form-field-1" class="col-xs-10 col-sm-4" ng-model="searchObj.createDateTo" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Người lập </label>
+
+                                                        <div class="col-sm-9">
+                                                            <select ng-model="searchObj.emId" ng-options="em.emId as em.firstName +  ' ' +em.lastName for em in employeeList">
+                                                                <option selected value disabled>Tên NV</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div class="form-group center">
+                                            <button class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" value="search" ng-click="TimKiem()">
+                                                <i class="fa fa-search bigger-110 blue">Tìm kiếm</i>
+                                            </button>
+                                            &nbsp&nbsp
+                                            <button type="reset" ng-click="resetTable()" class="dt-button buttons-copy buttons-html5 btn btn-white btn-danger btn-bold">
+                                                <i class="fa fa-refresh  bigger-110 red">Làm lại</i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- div.dataTables_borderWrap -->
+                                <div class="dataTables_wrapper form-inline no-footer">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="dataTables_length">
+                                                Rows per page:
+                                                <input type="number" min="1" max="100" class="form-control" ng-model="pageSize">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="dataTables_length">
+                                                <div class="form-group" style="float: right">
+                                                    <label>Search: </label>
+                                                    <input type="text" ng-model="search" placeholder="Search">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="dtable" class="table table-striped table-bordered table-hover dataTable no-footer">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input type="checkbox" ng-click="checkAll()" ng-model="isAllSelected">
+                                                </th>
+                                                <th ng-click="sort('imId')">Mã phiếu
+                                                    <span class="glyphicon sort-icon" ng-show="sortKey=='imId'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
+                                                <th ng-click="sort('prName')">Tên hàng
+                                                    <span class="glyphicon sort-icon" ng-show="sortKey=='prName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
+                                                <th ng-click="sort('prCategory')">Loại hàng
+                                                    <span class="glyphicon sort-icon" ng-show="sortKey=='prCategory'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
+                                                <th ng-click="sort('suName')">Nhà cung cấp
+                                                    <span class="glyphicon sort-icon" ng-show="sortKey=='suName'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
+                                                <th ng-click="sort('unit')">Đơn giá
+                                                    <span class="glyphicon sort-icon" ng-show="sortKey=='unit'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
+                                                <th ng-click="sort('quantity')">Số lượng
+                                                    <span class="glyphicon sort-icon" ng-show="sortKey=='quantity'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
+                                                <th ng-click="sort('money')">Thành tiền
+                                                    <span class="glyphicon sort-icon" ng-show="sortKey=='money'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
+                                                <th>Đơn vị tính tiền</th>
+                                                <th ng-click="sort('createDate')">Ngày lập phiếu
+                                                    <span class="glyphicon sort-icon" ng-show="sortKey=='createDate'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
+                                                <th ng-click="sort('name')">Tên NV xuất
+                                                    <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                                </th>
+                                                <th>Ghi chú</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr dir-paginate="imOrder in importorderList | limitTo: limit |filter:search|orderBy:sortKey:reverse|itemsPerPage: pageSize"
+                                                ng-click="imOrder.isChecked=!imOrder.isChecked">
+                                                <td>
+                                                    <input type="checkbox" ng-model="imOrder.selected" ng-change="optionToggled()" ng-model="imOrder.isChecked" ng-checked="item.isRowSelected"
+                                                        ng-click="toggleSelection(item)">
+                                                </td>
+                                                <td>{{imOrder.imId}}</td>
+                                                <td>{{imOrder.prName}}</td>
+                                                <td>{{imOrder.prCategory}}</td>
+                                                <td>{{imOrder.suName}}</td>
+                                                <td>{{imOrder.unitPrice}}</td>
+                                                <td>{{imOrder.quantity}}</td>
+                                                <td>{{imOrder.money}}</td>
+                                                <td>{{imOrder.unit}}</td>
+                                                <td>{{imOrder.createDate}}</td>
+                                                <td>{{imOrder.firstName}} {{imOrder.lastName}}</td>
+                                                <td>{{imOrder.note}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="dataTables_info">Record number in page: {{importorderList.length}}
+                                            </div>
+                                        </div>
+                                        <div class="text-center" style="float: right; margin-right: 30px">
+                                            <dir-pagination-controls boundary-links="true" max-size="10" direction-links="true" template-url="/eas-web/view/pagination/dirPagination.tpl.html">
+                                            </dir-pagination-controls>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- PAGE CONTENT ENDS -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+</body>
+
+</html>

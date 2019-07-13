@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>Xuất hàng</title>
+    <!-- bootstrap & fontawesome -->
+    <link rel="stylesheet" href="/eas-web/view/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/eas-web/view/assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/eas-web/view/assets/css/fonts.googleapis.com.css" />
+    <link rel="stylesheet" href="/eas-web/view/assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+    <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.4/angular-material.min.css"> -->
+    <link rel="stylesheet" href="/eas-web/view/assets/css/angular-material.css" />
+
+    <link rel="stylesheet" href="/eas-web/view/assets/css/intern05-eas.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.4.0/restangular.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-resource.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+    <script src="/eas-web/view/assets/js/jquery-2.1.4.min.js"></script>
+    <script src="/eas-web/view/assets/js/bootstrap.min.js"></script>
+    <script src="/eas-web/view/assets/js/ace.min.js"></script>
+
+    <script src="/eas-web/view/pagination/dirPagination.js"></script>
+    <!--     <script src="Exportorder.js"></script> -->
+    <script src="Exportorder.service.js"></script>
+    <script src="Exportorder.controller.js"></script>
+</head>
+
+<body class="no-skin" ng-app="exportOrder" ng-controller="exportorderCtrl as ctrl">
+    <div id="navbar" class="navbar navbar-default ace-save-state">
+        <div class="navbar-container ace-save-state" id="navbar-container">
+            <div class="navbar-header pull-left">
+                <a href="index.html" class="navbar-brand">
+                    <small>
+                        <i class="fa fa-laptop"></i> Siêu thị điện máy
+                    </small>
+                </a>
+            </div>
+
+        </div>
+        <!-- /.navbar-container -->
+    </div>
+    <!-- Main -->
+    <div class="main-container ace-save-state" id="main-container">
+        <div id="sidebar" class="sidebar  responsive  ace-save-state">
+            <ul class="nav nav-list">
+                <!-- <li class="">
+					<a href="index.html">
+						<i class="menu-icon fa fa-tachometer"></i>
+						<span class="menu-text">
+							Trang chủ </span>
+					</a>
+					<b class="arrow"></b>
+				</li> -->
+
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-users"></i>
+                        <span class="menu-text">Quản lý nhân sự</span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="/eas-web/eas/employee/employee.html" target="_blank">
+                                <i class="menu-icon fa fa-caret-right"></i>Hồ sơ nhân viên
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <!-- <li class="">
+							<a href="#" class="dropdown-toggle">
+								<i class="menu-icon fa fa-caret-right"></i> Layouts
+							</a>
+							<b class="arrow"></b>
+						</li> -->
+                    </ul>
+                </li>
+
+                <li class="active open">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-archive"></i>
+                        <span class="menu-text">
+                            Quản lý kho </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="/eas-web/eas/warehouse/Importorder/Importorder.html" target="_blank">
+                                <i class="menu-icon fa fa-caret-right"></i> Nhập hàng
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="active">
+                            <a href="">
+                                <i class="menu-icon fa fa-caret-right"></i> Xuất hàng
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="/eas-web/eas/warehouse/Statistics/Statistics.html" target="_blank">
+                                <i class="menu-icon fa fa-caret-right"></i> Thống kê
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-list-alt"></i>
+                        <span class="menu-text">
+                            Quản lý đơn hàng </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="/eas-web/eas/invoice/invoice.html" target="_blank">
+                                <i class="menu-icon fa fa-caret-right"></i> Quản lý hóa đơn
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="">
+                            <a href="/eas-web/eas/invoice/create-invoice.html" target="_blank">
+                                <i class="menu-icon fa fa-caret-right"></i> Tạo mới hóa đơn
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.nav-list -->
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
+        </div>
+
+
+        <div class="main-content">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h3 class="header smaller lighter blue" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Phiếu xuất hàng</h3>
+                                <div class="clearfix">
+                                    <div class="pull-left tableTools-container">
+                                        <div class="dt-buttons btn-overlap btn-group">
+                                            <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Thêm mới" ng-click="ctrl.Add()" name="click">
+                                                <span>
+                                                    <i class="fa fa-plus bigger-110 blue"></i>
+                                                    <span class="hidden">Thêm mới</span>
+                                                </span>
+                                            </a>
+                                            <a class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Sửa" ng-click="ctrl.doOpenEditForm()">
+                                                <span>
+                                                    <i class="fa fa-pencil bigger-110 pink"></i>
+                                                    <span class="hidden">Sửa</span>
+                                                </span>
+                                            </a>
+                                            <a class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Xóa" ng-click="ctrl.deleteObj()">
+                                                <span>
+                                                    <i class="fa fa-trash-o bigger-110 orange"></i>
+                                                    <span class="hidden">Xóa</span>
+                                                </span>
+                                            </a>
+                                            <a class="dt-button buttons-excel buttons-flash btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" title="Lưu" ng-click="ctrl.saveUpdate()" type="submit">
+                                                <span>
+                                                    <i class="fa fa-floppy-o bigger-110 green"></i>
+                                                    <span class="hidden">Lưu</span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <div class="dt-buttons btn-overlap btn-group">
+                                            <a class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Tìm kiếm" ng-click="ctrl.search1()">
+                                                <span>
+                                                    <i class="fa fa-search bigger-110 pink"></i>
+                                                    <span class="hidden">Tìm kiếm</span>
+                                                </span>
+                                            </a>
+                                            <a class="dt-button buttons-csv buttons-html5 btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Xem bảng/chi tiết" ng-click="ctrl.viewObj()">
+                                                <span>
+                                                    <i class="fa fa-list-alt bigger-110 blue"></i>
+                                                    <span class="hidden">Xem bảng/chi tiết</span>
+                                                </span>
+                                            </a>
+                                            <a class="dt-button buttons-collection buttons-colvis btn btn-white btn-primary btn-bold" tabindex="0" aria-controls="dynamic-table" data-original-title="" title="Xuất file Excel">
+                                                <span>
+                                                    <i class="fa fa-file-excel-o bigger-110 green"></i>
+                                                    <span class="hidden">Xuất file Excel</span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <!-- thêm mới phiếu xuất -->
+                                <div ng-show="ctrl.nhapHang">
+                                    <form class="form-horizontal widget-box " role="form">
+                                        <div class="widget-header">
+                                            <h4 class="widget-title">
+                                                <i class="fa fa-plus bigger-110 blue"></i> Thêm mới
+                                                <a title="Đóng" ng-click="ctrl.closeAdd()"><i class="fa fa-times-circle bigger-130 red" style="float:right; margin:10px; cursor: pointer"></i></a>
+                                            </h4>
+                                        </div>
+                                        <br />
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên hàng:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <!-- <select type="text" ng-model="ctrl.exportorder.prId" ng-options="addObj.prId as addObj.prName for addObj in ctrl.productList" ng-change="ctrl.changePrcategory()">
+                                                                <option selected disabled value>-- Chọn tên hàng --</option>
+                                                            </select> -->
+
+                                                            <md-autocomplete class="col-sm-9" style="padding-left:0; padding-right: 0" md-selected-item="ctrl.selectedItemProduct" md-search-text="ctrl.searchTextProduct" md-items="item in ctrl.querySearchProduct(ctrl.searchTextProduct)" md-item-text="item.display"
+                                                                md-min-length="0" placeholder="Chọn tên hàng?" required>
+                                                                <md-item-template>
+                                                                    <span md-highlight-text="ctrl.searchTextProduct" md-highlight-flags="^i">{{item.display}}</span>
+                                                                </md-item-template>
+                                                                <md-not-found>Không tên hàng "{{ctrl.searchTextProduct}}" trong danh sách</md-not-found>
+                                                            </md-autocomplete>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Loại hàng:* </label>
+                                                        <div class="col-sm-9">
+                                                            <!-- <select type="text" placeholder="Loại hàng" ng-model="ctrl.exportorder.prCategoryId" ng-options="dm.prCategoryId as dm.prCategory for dm in ctrl.prCategoryList" ng-change="ctrl.changeProduct()">
+                                                                <option selected disabled value>-- Chọn loại hàng --</option>
+                                                            </select> -->
+
+                                                            <md-autocomplete class="col-sm-9" style="padding-left:0; padding-right: 0" md-selected-item="ctrl.selectedItemPrCategory" md-search-text="ctrl.searchTextPrCategory" md-items="item in ctrl.querySearchPrCategory(ctrl.searchTextPrCategory)" md-item-text="item.display"
+                                                                md-min-length="0" placeholder="Chọn tên hàng?" required>
+                                                                <md-item-template>
+                                                                    <span md-highlight-text="ctrl.searchTextPrCategory" md-highlight-flags="^i">{{item.display}}</span>
+                                                                </md-item-template>
+                                                                <md-not-found>Không có loại hàng "{{ctrl.searchTextPrCategory}}" trong danh sách</md-not-found>
+                                                            </md-autocomplete>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Đơn giá:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" ng-model="ctrl.exportorder.unitPrice" class="col-xs-10 col-sm-9" maxlength="38" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Số lượng xuất:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" ng-model="ctrl.exportorder.quantity" class="col-xs-10 col-sm-9" maxlength="38" />
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" readonly for="form-field-1"> Đơn vị tính tiền </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" ng-model="ctrl.exportorder.unit" class="col-xs-10 col-sm-9" value="ctrl.exportorder.donvitinh" readonly/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ngày lập phiếu:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="date" id="form-field-1" ng-model="ctrl.exportorder.createDate" class="col-xs-10 col-sm-9" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Người lập:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <!-- <select ng-model="ctrl.exportorder.emId" ng-options="em.emId as em.firstName +  ' ' +em.lastName for em in ctrl.employeeList">
+                                                            <option selected value disabled>Chọn nhân viên lập phiếu</option>
+                                                            </select> -->
+                                                            <md-autocomplete class="col-sm-9" style="padding-left:0; padding-right: 0" md-selected-item="ctrl.selectedItemEmployee" md-search-text="ctrl.searchTextEmployee" md-items="item in ctrl.querySearchEmployee(ctrl.searchTextEmployee)" md-item-text="item.display"
+                                                                md-min-length="0" placeholder="Chọn nhân viên lập phiếu?" required>
+                                                                <md-item-template>
+                                                                    <span md-highlight-text="ctrl.searchTextEmployee" md-highlight-flags="^i">{{item.display}}</span>
+                                                                </md-item-template>
+                                                                <md-not-found>Không có nhân viên "{{ctrl.searchTextEmployee}}" trong danh sách</md-not-found>
+                                                            </md-autocomplete>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ghi chú </label>
+
+                                                        <div class="col-sm-9">
+                                                            <textarea type="text" id="form-field-1" placeholder="" ng-model="ctrl.exportorder.note" class="col-xs-10 col-sm-9"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                                <!-- Sửa thông tin -->
+                                <div ng-show="ctrl.edit">
+                                    <form class="form-horizontal widget-box " role="form">
+                                        <div class="widget-header">
+                                            <h4 class="widget-title">
+                                                <i class="fa fa-list-alt bigger-110 blue"></i> Sửa thông tin
+                                                <a title="Đóng" ng-click="ctrl.doCloseEditForm()"><i class="fa fa-times-circle bigger-130 red" style="float:right; margin:10px; cursor: pointer"></i></a>
+                                            </h4>
+                                        </div>
+                                        <br />
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Mã phiếu </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" ng-model="ctrl.exportorder.exId" readonly class="col-xs-10 col-sm-9" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên hàng:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <md-autocomplete class="col-sm-9" style="padding-left:0; padding-right: 0" md-selected-item="ctrl.exportorder.prName" md-search-text="ctrl.searchTextProduct" md-items="item in ctrl.querySearchProduct(ctrl.searchTextProduct)" md-item-text="item.display"
+                                                                md-min-length="0" placeholder="Chọn tên hàng?" required>
+                                                                <md-item-template>
+                                                                    <span md-highlight-text="ctrl.searchTextProduct" md-highlight-flags="^i">{{item.display}}</span>
+                                                                </md-item-template>
+                                                                <md-not-found>Không tên hàng "{{ctrl.searchTextProduct}}" trong danh sách</md-not-found>
+                                                            </md-autocomplete>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Loại hàng:* </label>
+                                                        <div class="col-sm-9">
+                                                            <md-autocomplete class="col-sm-9" style="padding-left:0; padding-right: 0" md-selected-item="ctrl.exportorder.prCategory" md-search-text="ctrl.searchTextPrCategory" md-items="item in ctrl.querySearchPrCategory(ctrl.searchTextPrCategory)" md-item-text="item.display"
+                                                                md-min-length="0" placeholder="Chọn tên hàng?" required>
+                                                                <md-item-template>
+                                                                    <span md-highlight-text="ctrl.searchTextPrCategory" md-highlight-flags="^i">{{item.display}}</span>
+                                                                </md-item-template>
+                                                                <md-not-found>Không có loại hàng "{{ctrl.searchTextPrCategory}}" trong danh sách</md-not-found>
+                                                            </md-autocomplete>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Đơn giá:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" ng-model="ctrl.exportorder.unitPrice" class="col-xs-10 col-sm-9" maxlength="38" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Số lượng nhập:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" placeholder="" ng-model="ctrl.exportorder.quantity" class="col-xs-10 col-sm-9" maxlength="38" />
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" readonly for="form-field-1"> Đơn vị tính tiền </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" ng-model="ctrl.exportorder.unit" class="col-xs-10 col-sm-9" readonly/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ngày lập phiếu:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="date" id="form-field-1" placeholder="" ng-model="ctrl.exportorder.createDate" class="col-xs-10 col-sm-9" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Người lập:* </label>
+
+                                                        <div class="col-sm-9">
+                                                            <md-autocomplete class="col-sm-9" style="padding-left:0; padding-right: 0" md-selected-item="ctrl.exportorder.emName" md-search-text="ctrl.searchTextEmployee" md-items="item in ctrl.querySearchEmployee(ctrl.searchTextEmployee)" md-item-text="item.display"
+                                                                md-min-length="0" placeholder="Chọn nhân viên lập phiếu?" required>
+                                                                <md-item-template>
+                                                                    <span md-highlight-text="ctrl.searchTextEmployee" md-highlight-flags="^i">{{item.display}}</span>
+                                                                </md-item-template>
+                                                                <md-not-found>Không có nhân viên "{{ctrl.searchTextEmployee}}" trong danh sách</md-not-found>
+                                                            </md-autocomplete>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ghi chú </label>
+
+                                                        <div class="col-sm-9">
+                                                            <textarea type="text" id="form-field-1" placeholder="" ng-model="ctrl.exportorder.note" class="col-xs-10 col-sm-9"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                                <!-- Xem chi tiết -->
+                                <div ng-show="ctrl.view">
+                                    <form class="form-horizontal widget-box " role="form">
+                                        <div class="widget-header">
+                                            <h4 class="widget-title">
+                                                <i class="fa fa-list-alt bigger-110 blue"></i> Xem thông tin
+                                                <a title="Đóng" ng-click="ctrl.closeviewObj()"><i class="fa fa-times-circle bigger-130 red" style="float:right; margin:10px; cursor: pointer"></i></a>
+                                            </h4>
+                                        </div>
+                                        <br />
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Mã phiếu </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{ctrl.exportorder.exId}}" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên hàng </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{ctrl.exportorder.prName}}" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Loại hàng </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{ctrl.exportorder.prCategory}}" />
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Đơn giá </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{ctrl.exportorder.unitPrice}}" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Số lượng xuất </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="number" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{ctrl.exportorder.quantity}}" />
+                                                        </div>
+                                                    </div>
+
+                                                </td>
+                                                <td class="col-sm-5 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Đơn vị tính tiền </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{ctrl.exportorder.unit}}" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ngày lập phiếu </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="date" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{ctrl.exportorder.createDate}}" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Người lập </label>
+
+                                                        <div class="col-sm-9">
+                                                            <input type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{ctrl.exportorder.firstName}} {{ctrl.exportorder.lastName}}" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Ghi chú </label>
+
+                                                        <div class="col-sm-9">
+                                                            <textarea type="text" id="form-field-1" placeholder="" readonly class="col-xs-10 col-sm-9" value="{{ctrl.exportorder.note}}"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
+                                <!-- tìm kiếm -->
+                                <div ng-show="ctrl.searchform">
+                                    <form class="form-horizontal widget-box " role="form">
+                                        <div class="widget-header">
+                                            <h4 class="widget-title">
+                                                <i class="fa fa-search-o bigger-110 blue"></i> Tìm kiếm
+                                                <a title="Đóng" ng-click="ctrl.closeTimKiem()"><i class="fa fa-times-circle bigger-130 red" style="float:right; margin:10px; cursor: pointer"></i></a>
+                                            </h4>
+                                        </div>
+                                        <br />
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td class="col-sm-4 align-top">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Mã phiếu </label>
+
+                                                        <div class="col-sm-4">
+                                                            <input type="number" id="form-field-1" style="width: 185%" class="col-xs-10 col-sm-9" ng-model="ctrl.exportorder.exId" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên hàng </label>
+
+                                                        <div class="col-sm-9">
+                                                            <md-autocomplete class="col-sm-9" style="padding-left:0; padding-right: 0" md-selected-item="ctrl.selectedItemProduct" md-search-text="ctrl.searchTextProduct" md-items="item in ctrl.querySearchProduct(ctrl.searchTextProduct)" md-item-text="item.display"
+                                                                md-min-length="0" placeholder="Chọn tên hàng?">
+                                                                <md-item-template>
+                                                                    <span md-highlight-text="ctrl.searchTextProduct" md-highlight-flags="^i">{{item.display}}</span>
+                                                                </md-item-template>
+                                                                <md-not-found>Không tên hàng "{{ctrl.searchTextProduct}}" trong danh sách</md-not-found>
+                                                            </md-autocomplete>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Loại hàng </label>
+                                                        <div class="col-sm-9">
+                                                            <md-autocomplete class="col-sm-9" style="padding-left:0; padding-right: 0" md-selected-item="ctrl.selectedItemPrCategory" md-search-text="ctrl.searchTextPrCategory" md-items="item in ctrl.querySearchPrCategory(ctrl.searchTextPrCategory)" md-item-text="item.display"
+                                                                md-min-length="0" placeholder="Chọn tên hàng?">
+                                                                <md-item-template>
+                                                                    <span md-highlight-text="ctrl.searchTextPrCategory" md-highlight-flags="^i">{{item.display}}</span>
+                                                                </md-item-template>
+                                                                <md-not-found>Không có loại hàng "{{ctrl.searchTextPrCategory}}" trong danh sách</md-not-found>
+                                                            </md-autocomplete>
+                                                        </div>
+
+                                                    </div>
+                                                </td>
+                                                <td class="col-sm-6 align-top">
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Ngày lập phiếu: </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="date" id="form-field-1" class="col-xs-10 col-sm-4" ng-model="ctrl.exportorder.createDateFrom" style="width: 247px" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label center" for="form-field-1"> Đến ngày </label>
+                                                        <div class="col-sm-9">
+                                                            <input type="date" id="form-field-1" class="col-xs-10 col-sm-4" ng-model="ctrl.exportorder.createDateTo" style="width: 247px" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Người lập </label>
+
+                                                        <div class="col-sm-9">
+                                                            <md-autocomplete class="col-sm-9" style="padding-left:0; padding-right: 0; width:247px" md-selected-item="ctrl.selectedItemEmployee" md-search-text="ctrl.searchTextEmployee" md-items="item in ctrl.querySearchEmployee(ctrl.searchTextEmployee)" md-item-text="item.display"
+                                                                md-min-length="0" placeholder="Chọn nhân viên lập phiếu?">
+                                                                <md-item-template>
+                                                                    <span md-highlight-text="ctrl.searchTextEmployee" md-highlight-flags="^i">{{item.display}}</span>
+                                                                </md-item-template>
+                                                                <md-not-found>Không có nhân viên "{{ctrl.searchTextEmployee}}" trong danh sách</md-not-found>
+                                                            </md-autocomplete>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div class="form-group center">
+                                            <button class="dt-button buttons-copy buttons-html5 btn btn-white btn-primary btn-bold" value="search" ng-click="ctrl.TimKiem()">
+                                                <i class="fa fa-search bigger-110 blue">Tìm kiếm</i>
+                                            </button> &nbsp&nbsp
+                                            <button type="reset" ng-click="ctrl.resetTable()" class="dt-button buttons-copy buttons-html5 btn btn-white btn-danger btn-bold">
+                                                <i class="fa fa-refresh  bigger-110 red">Làm lại</i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- div.dataTables_borderWrap -->
+                                <div class="dataTables_wrapper form-inline no-footer">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="dataTables_length">
+                                                Rows per page:
+                                                <input type="number" min="1" max="100" class="form-control" ng-model="ctr.pageSize">
+<!--                                                 <select ng-model="ctrl.numberPage" ng-change="ctrl.rowOnPage()"> -->
+<!--                                                 	<option value="1">5</option> -->
+<!--                                                 	<option value="2">10</option> -->
+<!--                                                 	<option value="3">15</option> -->
+<!--                                                 </select> -->
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="dataTables_length">
+                                                <div class="form-group" style="float: right">
+                                                    <label>Search: </label>
+                                                    <input type="text" ng-model="ctrl.search" placeholder="Search">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table id="dtable" class="table table-striped table-bordered table-hover dataTable no-footer">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <input type="checkbox" ng-click="ctrl.checkAll()" ng-model="ctrl.isAllSelected">
+                                                </th>
+                                                <th ng-click="ctrl.sort('exId')">Mã phiếu
+                                                    <span class="glyphicon sort-icon" ng-show="ctrl.sortKey=='exId'" ng-class="{'glyphicon-chevron-up':ctrl.reverse,'glyphicon-chevron-down':!ctrl.reverse}"></span>
+                                                </th>
+                                                <th ng-click="ctrl.sort('prName')">Tên hàng
+                                                    <span class="glyphicon sort-icon" ng-show="ctrl.sortKey=='prName'" ng-class="{'glyphicon-chevron-up':ctrl.reverse,'glyphicon-chevron-down':!ctrl.reverse}"></span>
+                                                </th>
+                                                <th ng-click="ctrl.sort('prCategory')">Loại hàng
+                                                    <span class="glyphicon sort-icon" ng-show="ctrl.sortKey=='prCategory'" ng-class="{'glyphicon-chevron-up':ctrl.reverse,'glyphicon-chevron-down':!ctrl.reverse}"></span>
+                                                </th>
+                                                <th ng-click="ctrl.sort('unit')">Đơn giá
+                                                    <span class="glyphicon sort-icon" ng-show="ctrl.sortKey=='unit'" ng-class="{'glyphicon-chevron-up':ctrl.reverse,'glyphicon-chevron-down':!ctrl.reverse}"></span>
+                                                </th>
+                                                <th ng-click="ctrl.sort('quantity')">Số lượng
+                                                    <span class="glyphicon sort-icon" ng-show="ctrl.sortKey=='quantity'" ng-class="{'glyphicon-chevron-up':ctrl.reverse,'glyphicon-chevron-down':!ctrl.reverse}"></span>
+                                                </th>
+                                                <th ng-click="ctrl.sort('money')">Thành tiền
+                                                    <span class="glyphicon sort-icon" ng-show="ctrl.sortKey=='money'" ng-class="{'glyphicon-chevron-up':ctrl.reverse,'glyphicon-chevron-down':!ctrl.reverse}"></span>
+                                                </th>
+                                                <th>Đơn vị tính tiền</th>
+                                                <th ng-click="ctrl.sort('createDate')">Ngày lập phiếu
+                                                    <span class="glyphicon sort-icon" ng-show="ctrl.sortKey=='createDate'" ng-class="{'glyphicon-chevron-up':ctrl.reverse,'glyphicon-chevron-down':!ctrl.reverse}"></span>
+                                                </th>
+                                                <th ng-click="ctrl.sort('name')">Tên NV xuất
+                                                    <span class="glyphicon sort-icon" ng-show="ctrl.sortKey=='name'" ng-class="{'glyphicon-chevron-up':ctrl.reverse,'glyphicon-chevron-down':!ctrl.reverse}"></span>
+                                                </th>
+                                                <th>Ghi chú</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr dir-paginate="exOrder in ctrl.exportorderList | limitTo: limit |filter:search|orderBy: ctrl.sortKey :ctrl.reverse|itemsPerPage: ctrl.pageSize" ng-click="exOrder.isChecked=!exOrder.isChecked">
+                                                <td>
+                                                    <input type="checkbox" ng-model="exOrder.selected" ng-change="optionToggled()" ng-model="exOrder.isChecked" ng-checked="item.isRowSelected" ng-click="ctrl.toggleSelection(item)">
+                                                </td>
+                                                <td>{{exOrder.exId}}</td>
+                                                <td>{{exOrder.prName}}</td>
+                                                <td>{{exOrder.prCategory}}</td>
+                                                <td>{{exOrder.unitPrice}}</td>
+                                                <td>{{exOrder.quantity}}</td>
+                                                <td>{{exOrder.money}}</td>
+                                                <td>{{exOrder.unit}}</td>
+                                                <td>{{exOrder.createDate}}</td>
+                                                <td>{{exOrder.firstName}} {{exOrder.lastName}}</td>
+                                                <td>{{exOrder.note}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="dataTables_info">Record number in page: {{ctrl.exportorderList.length}}
+                                            </div>
+                                        </div>
+                                        <div class="text-center" style="float: right; margin-right: 30px">
+                                            <dir-pagination-controls boundary-links="true" max-size="10" direction-links="true" template-url="/eas-web/view/pagination/dirPagination.tpl.html">
+                                            </dir-pagination-controls>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- PAGE CONTENT ENDS -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+</body>
+
+</html>
